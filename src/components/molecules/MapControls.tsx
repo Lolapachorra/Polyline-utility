@@ -1,3 +1,6 @@
+"use client";
+
+import { useTranslations } from 'next-intl';
 import Button from '../atoms/Button';
 
 interface MapControlsProps {
@@ -7,10 +10,12 @@ interface MapControlsProps {
 }
 
 export default function MapControls({ pointsCount, onClose, onClear }: MapControlsProps) {
+  const t = useTranslations();
+
   return (
     <div className="flex items-center justify-between mb-2">
       <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
-        Clique no mapa para adicionar pontos:
+        {t('labels.clickMapToAdd')}
       </label>
       <div className="flex gap-2">
         {onClose && (
@@ -20,7 +25,7 @@ export default function MapControls({ pointsCount, onClose, onClear }: MapContro
             disabled={pointsCount < 2}
             className="text-xs px-3 py-1.5"
           >
-            Fechar Polígono
+            {t('buttons.closePolygon')}
           </Button>
         )}
         <Button
@@ -29,7 +34,7 @@ export default function MapControls({ pointsCount, onClose, onClear }: MapContro
           disabled={pointsCount === 0}
           className="text-xs px-3 py-1.5"
         >
-          Limpar Pontos
+          {t('buttons.clearPoints')}
         </Button>
       </div>
     </div>

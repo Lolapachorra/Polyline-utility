@@ -15,6 +15,7 @@ import TextArea from "../atoms/TextArea";
 import CodeBlock from "../atoms/CodeBlock";
 import InfoBox from "../atoms/InfoBox";
 import MapControls from "../molecules/MapControls";
+import { useTranslations } from "next-intl";
 
 const MapView = dynamic(() => import("./MapView"), {
   ssr: false,
@@ -41,7 +42,7 @@ const InteractiveMap = dynamic(() => import("./InteractiveMap"), {
 export default function PolylineDecoder() {
   const [activeTab, setActiveTab] = useState<Tab>("string");
   const { copyToClipboard } = useClipboard();
-
+  const t = useTranslations();
   // String → Pontos
   const {
     encodedString,
@@ -90,10 +91,10 @@ export default function PolylineDecoder() {
       <div className="max-w-7xl mx-auto">
         <header className="mb-8 text-center">
           <h1 className="text-4xl font-bold text-slate-900 dark:text-white mb-2">
-            Decodificador de Polyline
+            {t('app.title')}
           </h1>
           <p className="text-slate-600 dark:text-slate-400">
-            Uma alternativa simples e eficiente ao Google Polyline Encoder
+            {t('app.subtitle')}
           </p>
         </header>
 
@@ -103,19 +104,19 @@ export default function PolylineDecoder() {
               active={activeTab === "string"}
               onClick={() => setActiveTab("string")}
             >
-              String → Pontos
+              {t('tabs.stringToPoints')}
             </TabButton>
             <TabButton
               active={activeTab === "array"}
               onClick={() => setActiveTab("array")}
             >
-              Array → Polyline
+              {t('tabs.arrayToPolyline')}
             </TabButton>
             <TabButton
               active={activeTab === "map"}
               onClick={() => setActiveTab("map")}
             >
-              Mapa Interativo
+              {t('tabs.interactiveMap')}
             </TabButton>
           </div>
 
@@ -123,7 +124,7 @@ export default function PolylineDecoder() {
             {activeTab === "string" && (
               <div className="space-y-6">
                 <TextArea
-                  label="Cole a string polyline codificada:"
+                  label={t('labels.polylineInput')}
                   value={encodedString}
                   onChange={(e) => setEncodedString(e.target.value)}
                   placeholder={PLACEHOLDERS.POLYLINE_STRING}
@@ -133,7 +134,7 @@ export default function PolylineDecoder() {
 
                 <div className="flex gap-3 flex-wrap">
                   <Button onClick={handleDecode} disabled={!encodedString}>
-                    Decodificar
+                    {t('buttons.decode')}
                   </Button>
                   <Button
                     variant="purple"
@@ -141,10 +142,10 @@ export default function PolylineDecoder() {
                     disabled={!encodedString}
                     title="Remove escapes de JSON (\\, \\u003d, etc.)"
                   >
-                    Remover Escapes
+                    {t('buttons.removeEscapes')}
                   </Button>
                   <Button variant="secondary" onClick={handleClear}>
-                    Limpar
+                    {t('buttons.clear')}
                   </Button>
                 </div>
 
@@ -152,17 +153,17 @@ export default function PolylineDecoder() {
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                        Visualização no Mapa:
+                        {t('labels.mapVisualization')}
                       </label>
                       <MapView points={decodedPoints} />
                       <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        {decodedPoints.length} ponto(s) visualizado(s)
+                        {decodedPoints.length} {t('labels.pointsVisualized')}
                       </p>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <CodeBlock
-                        label="Coordenadas [lat, lng]:"
+                        label={`${t('labels.coordinates')} [lat, lng]:`}
                         onCopy={() =>
                           copyToClipboard(
                             JSON.stringify(decodedPoints, null, 2)
@@ -172,9 +173,9 @@ export default function PolylineDecoder() {
                           <button
                             onClick={handleSwapLatLng}
                             className="text-xs px-2 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors"
-                            title="Inverter Lat/Lng"
+                            title={t('buttons.invertLatLng')}
                           >
-                            ⇄ Inverter
+                            ⇄ {t('buttons.invertLatLng')}
                           </button>
                         }
                       >
@@ -196,7 +197,7 @@ export default function PolylineDecoder() {
             {activeTab === "array" && (
               <div className="space-y-6">
                 <TextArea
-                  label="Cole o array de pontos (JSON):"
+                  label={t('labels.arrayInput')}
                   value={arrayInput}
                   onChange={(e) => setArrayInput(e.target.value)}
                   placeholder={PLACEHOLDERS.ARRAY_INPUT}
@@ -206,10 +207,10 @@ export default function PolylineDecoder() {
 
                 <div className="flex gap-3 flex-wrap">
                   <Button onClick={handleEncodeArray} disabled={!arrayInput}>
-                    Codificar
+                    {t('buttons.encode')}
                   </Button>
                   <Button variant="secondary" onClick={handleClearArray}>
-                    Limpar
+                    {t('buttons.clear')}
                   </Button>
                 </div>
 
@@ -217,25 +218,25 @@ export default function PolylineDecoder() {
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                        Visualização no Mapa:
+                        {t('labels.mapVisualization')}
                       </label>
                       <MapView points={arrayPoints} />
                       <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                        {arrayPoints.length} ponto(s) visualizado(s)
+                        {arrayPoints.length} {t('labels.pointsVisualized')}
                       </p>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <CodeBlock
-                        label="Polyline Codificada:"
+                        label={`${t('labels.polyline')} ${t('buttons.encode')}:`}
                         onCopy={() => copyToClipboard(encodedPolyline)}
                         actions={
                           <button
                             onClick={handleSwapArrayLatLng}
                             className="text-xs px-2 py-1 bg-orange-500 text-white rounded hover:bg-orange-600 transition-colors"
-                            title="Inverter Lat/Lng"
+                            title={t('buttons.invertLatLng')}
                           >
-                            ⇄ Inverter
+                            ⇄ {t('buttons.invertLatLng')}
                           </button>
                         }
                       >
@@ -257,7 +258,7 @@ export default function PolylineDecoder() {
             {activeTab === "map" && (
               <div className="space-y-6">
                 <InfoBox>
-                  <strong>💡 Como usar:</strong> {UI_MESSAGES.MAP_INSTRUCTIONS}
+                  <strong>💡 {t('labels.howToUse')}</strong> {t('labels.mapInstructions')}
                 </InfoBox>
 
                 <div>
@@ -271,14 +272,14 @@ export default function PolylineDecoder() {
                     onPointsChange={handleMapPointsChange}
                   />
                   <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
-                    {mapPoints.length} ponto(s) adicionado(s)
+                    {mapPoints.length} {t('labels.pointsAdded')}
                   </p>
                 </div>
 
                 {mapPoints.length > 0 && (
                   <div className="grid md:grid-cols-2 gap-6">
                     <CodeBlock
-                      label="Coordenadas [lat, lng]:"
+                      label={`${t('labels.coordinates')} [lat, lng]:`}
                       height="h-64"
                       onCopy={() =>
                         copyToClipboard(JSON.stringify(mapPoints, null, 2))
@@ -288,7 +289,7 @@ export default function PolylineDecoder() {
                     </CodeBlock>
 
                     <CodeBlock
-                      label="Polyline Codificada:"
+                      label={`${t('labels.polyline')} ${t('buttons.encode')}:`}
                       height="h-64"
                       onCopy={() => copyToClipboard(mapEncodedPolyline)}
                     >
@@ -303,8 +304,7 @@ export default function PolylineDecoder() {
 
         <footer className="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
           <p>
-            Desenvolvido com o intuito de ser mais fácil de usar que o Google
-            Polyline Encoder
+            {t('footer.developedWith')}
           </p>
         </footer>
       </div>
