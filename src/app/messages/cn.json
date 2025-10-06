@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Polyline 助手",
+    "description": "类似于 Google Polyline 解码工具"
+  },
+  "app": {
+    "title": "Polyline 解码器",
+    "subtitle": "一个现代高效的 Google Polylines 编码和解码应用程序"
+  },
+  "tabs": {
+    "stringToPoints": "字符串转坐标",
+    "arrayToPolyline": "数组转 Polyline",
+    "interactiveMap": "交互式地图"
+  },
+  "buttons": {
+    "decode": "解码",
+    "encode": "编码",
+    "copy": "复制",
+    "clear": "清除",
+    "closePolygon": "闭合多边形",
+    "invertLatLng": "反转纬度/经度",
+    "removeEscapes": "移除转义字符",
+    "clearPoints": "清除坐标点"
+  },
+  "labels": {
+    "polylineInput": "在此粘贴 polyline 字符串",
+    "arrayInput": "在此粘贴坐标数组",
+    "result": "结果",
+    "coordinates": "坐标",
+    "polyline": "Polyline",
+    "mapVisualization": "地图可视化：",
+    "pointsVisualized": "个坐标点已显示",
+    "pointsAdded": "个坐标点已添加",
+    "howToUse": "使用方法：",
+    "mapInstructions": "点击地图添加坐标点。使用闭合多边形按钮将最后一个点连接到第一个点。",
+    "clickMapToAdd": "点击地图添加坐标点：",
+    "FooterText": "Desenvolvido com o intuito de ser mais fácil de usar que o Google Polyline Encoder"
+  },
+  "messages": {
+    "copied": "已复制！",
+    "error": "处理时出错",
+    "invalidFormat": "格式无效"
+  },
+  "footer": {
+    "developedWith": "开发目的是比 Google Polyline Encoder 更易于使用"
+  }
+}
