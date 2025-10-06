@@ -1,0 +1,47 @@
+{
+  "metadata": {
+    "title": "Polyline Helper",
+    "description": "Works similar to google polyline decoder utility"
+  },
+  "app": {
+    "title": "Polyline Decoder",
+    "subtitle": "A modern and efficient application to encode and decode Google Polylines"
+  },
+  "tabs": {
+    "stringToPoints": "String to Points",
+    "arrayToPolyline": "Array to Polyline",
+    "interactiveMap": "Interactive Map"
+  },
+  "buttons": {
+    "decode": "Decode",
+    "encode": "Encode",
+    "copy": "Copy",
+    "clear": "Clear",
+    "closePolygon": "Close Polygon",
+    "invertLatLng": "Invert Lat/Lng",
+    "removeEscapes": "Remove Escapes",
+    "clearPoints": "Clear Points"
+  },
+  "labels": {
+    "polylineInput": "Paste the polyline string here",
+    "arrayInput": "Paste the coordinates array here",
+    "result": "Result",
+    "coordinates": "Coordinates",
+    "polyline": "Polyline",
+    "mapVisualization": "Map Visualization:",
+    "pointsVisualized": "point(s) visualized",
+    "pointsAdded": "point(s) added",
+    "howToUse": "How to use:",
+    "mapInstructions": "Click on the map to add points. Use the Close Polygon button to connect the last point to the first.",
+    "clickMapToAdd": "Click on the map to add points:",
+    "FooterText": "Desenvolvido com o intuito de ser mais fácil de usar que o Google Polyline Encoder"
+  },
+  "messages": {
+    "copied": "Copied!",
+    "error": "Error processing",
+    "invalidFormat": "Invalid format"
+  },
+  "footer": {
+    "developedWith": "Developed to be easier to use than Google Polyline Encoder"
+  }
+}
